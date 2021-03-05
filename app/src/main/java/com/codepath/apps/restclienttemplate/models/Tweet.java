@@ -16,7 +16,7 @@ public class Tweet {
         Tweet tweet = new Tweet();
         tweet.body = jsonObject.getString("text");
         tweet.createdAt = jsonObject.getString("created_at");
-        tweet.user = User.fromJson(jsonObject);
+        tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
                 return tweet;
     }
     // create list of tweets with function fromJsonArray
