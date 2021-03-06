@@ -43,10 +43,6 @@ public class TimelineActivity extends AppCompatActivity {
                 populateHomeTimeline();
             }
         });
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
         // find the recycler view
         rvTweets = findViewById(R.id.rvTweets);
         tweets = new ArrayList<>();
@@ -67,7 +63,6 @@ public class TimelineActivity extends AppCompatActivity {
                 JSONArray jsonArray = json.jsonArray;
                 try {
                     adapter.clear();
-                    // Tweet has a fromJsonArray method that takes in a jsonArray and adds each item into its tweets array list that is returned back
                    adapter.addAll(Tweet.fromJsonArray(jsonArray));
                    swipeContainer.setRefreshing(false);
 //
