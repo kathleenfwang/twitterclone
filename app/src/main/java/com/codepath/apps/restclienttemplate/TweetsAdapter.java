@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -86,9 +87,13 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         public void bind(Tweet tweet) {
             tvBody.setText(tweet.body);
             tvScreenName.setText(tweet.user.screenName);
-            Glide.with(context).load(tweet.user.imageUrl).into(ivProfileImage);
+            Glide.with(context).load(tweet.user.imageUrl)
+                    .transform(new RoundedCorners(30))
+                    .into(ivProfileImage);
             if (tweet.mediaUrl != null) {
-                Glide.with(context).load(tweet.mediaUrl).into(ivMediaImg);
+                Glide.with(context).load(tweet.mediaUrl)
+                        .transform(new RoundedCorners(30))
+                        .into(ivMediaImg);
             }
         }
     }
