@@ -2,9 +2,11 @@ package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,13 +22,16 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.w3c.dom.Text;
 
 import java.util.List;
 
-public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder> {
+import okhttp3.Headers;
 
+public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder> {
+    TwitterClient twitterClient;
     Context context;
     List<Tweet> tweets;
     // generate constructor to populate member variables
@@ -78,6 +83,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         TextView tvScreenName;
         ImageView ivMediaImg;
         TextView tvUserName;
+        Button btnDel;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
@@ -85,9 +91,10 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvScreenName = itemView.findViewById(R.id.tvScreenName);
             tvUserName = itemView.findViewById(R.id.tvUserHandle);
             ivMediaImg = itemView.findViewById(R.id.mediaImg);
+            btnDel = itemView.findViewById(R.id.btnDel);
         }
 
-        public void bind(Tweet tweet) {
+        public void bind(final Tweet tweet) {
             tvBody.setText(tweet.body);
             tvScreenName.setText(tweet.user.userName);
             tvUserName.setText("@" + tweet.user.screenName);
@@ -98,6 +105,22 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 Glide.with(context).load(tweet.mediaUrl)
                         .into(ivMediaImg);
             }
+            btnDel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    twitterClient.deleteTweet(tweet.id, new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Headers headers, JSON json) {
+                            Log.i("TweetAdapter","tweet deleted");
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                        Log.i("TWEETADAPTER", String.valueOf(throwable));
+                        }
+                    });
+                }
+            });
         }
     }
 }

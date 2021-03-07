@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tweet {
+    public int id;
     public String body;
     public String createdAt;
     public JSONObject entities;
@@ -19,6 +20,7 @@ public class Tweet {
     //creating individual tweet
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();
+        tweet.id = jsonObject.getInt("id");
         tweet.body = jsonObject.getString("text");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.entities = jsonObject.getJSONObject("entities");
