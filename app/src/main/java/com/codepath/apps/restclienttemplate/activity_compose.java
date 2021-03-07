@@ -2,6 +2,7 @@ package com.codepath.apps.restclienttemplate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,19 +14,26 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+
+import org.json.JSONException;
 import org.w3c.dom.Text;
+
+import okhttp3.Headers;
 
 public class activity_compose extends AppCompatActivity {
     private int maxChars = 180;
     EditText etCompose;
     Button btnTweet;
     TextView charCount;
+    TwitterClient twitterClient;
     private String TAG = "ActivityCompose";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
-
+        twitterClient = TwitterApp.getRestClient(this);
         etCompose = findViewById(R.id.etCompose);
         btnTweet = findViewById(R.id.btnTweet);
         charCount = findViewById(R.id.tvCharCount);
@@ -59,9 +67,31 @@ public class activity_compose extends AppCompatActivity {
                     Toast.makeText(activity_compose.this, "Sorry your tweet is " +  String.valueOf(tweetLength - maxChars) + " characters too long", Toast.LENGTH_SHORT ).show();
                     return;
                 }
+                // make an API call to Twitter to publish the tweet
+                twitterClient.publishTweet(tweetContent, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Headers headers, JSON json) {
+                        Log.i(TAG, "success publishing tweet");
+                        try {
+                           Tweet tweet = Tweet.fromJson(json.jsonObject);
+                            Log.i(TAG, "published tweet says: " + tweet.body);
+                            Toast.makeText(activity_compose.this,"Tweet published!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(activity_compose.this, TimelineActivity.class);
+                            startActivity(intent);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                        Log.i(TAG, "error publishing tweet:",throwable);
+                        Toast.makeText(activity_compose.this,"Tweet publish error!", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
-        // make an API call to Twitter to publish the tweet
 
     }
 }

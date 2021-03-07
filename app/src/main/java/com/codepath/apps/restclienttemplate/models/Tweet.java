@@ -15,6 +15,7 @@ public class Tweet {
     public JSONObject entities;
     public String mediaUrl;
     public User user;
+
     //creating individual tweet
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();
