@@ -32,15 +32,20 @@ public class activity_compose extends AppCompatActivity {
     TextView charCount;
     TwitterClient twitterClient;
     private String TAG = "ActivityCompose";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences pref =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences.Editor edit = pref.edit();
         setContentView(R.layout.activity_compose);
         twitterClient = TwitterApp.getRestClient(this);
         etCompose = findViewById(R.id.etCompose);
         btnTweet = findViewById(R.id.btnTweet);
         charCount = findViewById(R.id.tvCharCount);
-
+        etCompose.setText(pref.getString("tweetDraft", ""));
         etCompose.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -52,9 +57,11 @@ public class activity_compose extends AppCompatActivity {
                 }
                 charCount.setText(String.valueOf(totalChars));
             }
-
             @Override
-            public void afterTextChanged(Editable editable) {}
+            public void afterTextChanged(Editable editable) {
+                edit.putString("tweetDraft", String.valueOf(etCompose.getText()));
+                edit.commit();
+            }
         });
 
         // set click listener on button
@@ -75,10 +82,11 @@ public class activity_compose extends AppCompatActivity {
                 twitterClient.publishTweet(tweetContent, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Headers headers, JSON json) {
-                        Log.i(TAG, "success publishing tweet");
+                        edit.putString("tweetDraft","");
+                        edit.commit();
+
                         try {
                            Tweet tweet = Tweet.fromJson(json.jsonObject);
-                            Log.i(TAG, "published tweet says: " + tweet.body);
                             Toast.makeText(activity_compose.this,"Tweet published!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(activity_compose.this, TimelineActivity.class);
                             startActivity(intent);
@@ -90,7 +98,7 @@ public class activity_compose extends AppCompatActivity {
 
                     @Override
                     public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                        Log.i(TAG, "error publishing tweet:",throwable);
+                        Log.i(TAG, "error publishing tweet:" + String.valueOf(statusCode), throwable);
                         Toast.makeText(activity_compose.this,"Tweet publish error!", Toast.LENGTH_SHORT).show();
                     }
                 });
