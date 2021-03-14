@@ -17,10 +17,6 @@ The following functionality is completed:
   - [x] User is displayed the username, name, and body for each tweet
 - [x] User can refresh tweets timeline by pulling down to refresh
 - [x] User can see embedded image media within the tweet detail view
-
-The following features are implemented:
-
-- [x] User is using **"Twitter branded" colors and styles**
 - [x] User can click links in tweets launch the web browser 
  
 <img src='https://cdn.discordapp.com/attachments/749818179387392050/820123191573741598/twitterclone_2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
