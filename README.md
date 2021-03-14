@@ -21,10 +21,6 @@ The following functionality is completed:
  
 <img src='https://cdn.discordapp.com/attachments/749818179387392050/820123191573741598/twitterclone_2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-## Video Walkthrough
-
-Here's a walkthrough of implemented user stories:
-
 <img src='https://cdn.discordapp.com/attachments/749818179387392050/817620807529660446/a3485e68-eae4-4d84-bdcb-7b0d8b8ffb97.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
@@ -36,7 +32,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2021] [Kathleen Wang]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
