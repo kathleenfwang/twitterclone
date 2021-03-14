@@ -11,6 +11,7 @@ The following functionality is completed:
   - [x] User is taken back to home timeline with **new tweet visible** in timeline
   - [x] Newly created tweet should be manually inserted into the timeline and not rely on a full refresh
   - [x] User can **see a counter with total number of characters left for tweet** on compose tweet page
+  - [x] When a user leaves the compose view without publishing, the draft is **saved and persisted to disk** which can later be resumed from the compose view.
 - [x] User can **sign in to Twitter** using OAuth login
 - [x]	User can **view tweets from their home timeline**
   - [x] User is displayed the username, name, and body for each tweet
