@@ -21,7 +21,7 @@ The following functionality is completed:
  
 <img src='https://cdn.discordapp.com/attachments/749818179387392050/820123191573741598/twitterclone_2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-<img src='https://cdn.discordapp.com/attachments/749818179387392050/817620807529660446/a3485e68-eae4-4d84-bdcb-7b0d8b8ffb97.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://cdn.discordapp.com/attachments/749818179387392050/820731825906384926/Screen_Shot_2021-03-14_at_11.53.26_AM.png' title='Timeline' width='' alt='Timeline' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
