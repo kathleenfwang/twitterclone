@@ -5,6 +5,12 @@
 ## User Stories
 The following functionality is completed:
 
+- [x] User can **sign in to Twitter** using OAuth login
+- [x]	User can **view tweets from their home timeline**
+  - [x] User is displayed the username, name, and body for each tweet
+  - [x] User can refresh tweets timeline by pulling down to refresh
+  - [x] User can see embedded image media within the tweet detail view
+  - [x] User can click links in tweets launch the web browser
 - [x] User can **compose and post a new tweet**
   - [x] User can click a “Compose” icon in the Action Bar on the top right
   - [x] User can then enter a new tweet and post this to twitter
@@ -12,12 +18,6 @@ The following functionality is completed:
   - [x] Newly created tweet should be manually inserted into the timeline and not rely on a full refresh
   - [x] User can **see a counter with total number of characters left for tweet** on compose tweet page
   - [x] When a user leaves the compose view without publishing, the draft is **saved and persisted to disk** which can later be resumed from the compose view.
-- [x] User can **sign in to Twitter** using OAuth login
-- [x]	User can **view tweets from their home timeline**
-  - [x] User is displayed the username, name, and body for each tweet
-  - [x] User can refresh tweets timeline by pulling down to refresh
-  - [x] User can see embedded image media within the tweet detail view
-  - [x] User can click links in tweets launch the web browser 
  
 <img src='https://cdn.discordapp.com/attachments/749818179387392050/820123191573741598/twitterclone_2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
